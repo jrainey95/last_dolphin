@@ -5,6 +5,8 @@ const genPassword = require("../lib/passwordUtils").genPassword;
 const connection = require("../config/database");
 const User = connection.models.User;
 const isAuth = require("./authMiddleware").isAuth;
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 // ---------------- POST ROUTES ----------------
 
@@ -163,5 +165,63 @@ router.get("/account", isAuth, (req, res) => {
 });
 
 // Other routes...
+router.get("/api/fetchData", async (req, res) => {
+  try {
+    const axiosResponse = await axios.get(
+      "https://www.godolphin.com/runners-and-results/runners"
+    );
+    const html = axiosResponse.data;
+
+    const $ = cheerio.load(html);
+    const horseData = [];
+
+    // Scrape and collect the data
+    $(".race__day").each((index, element) => {
+      const raceDate = $(element).find(".header__text").text().trim();
+      $(element)
+        .find("tbody tr")
+        .each((i, row) => {
+          const horseName = $(row).find(".horse-name a").text().trim();
+          const racecourse = $(row).find(".racecourse-name").text().trim();
+          const timeLocal = $(row).find(".time").text().trim();
+          const trainer = $(row).find(".trainer").text().trim();
+          const jockey = $(row).find(".jockey").text().trim();
+          const raceName = $(row).find(".race-name a").text().trim();
+          const raceData = $(row).find(".race-data").text().trim();
+
+          horseData.push({
+            raceDay: raceDate,
+            horseName,
+            racecourse,
+            timeLocal,
+            trainer,
+            jockey,
+            raceName,
+            raceData,
+          });
+        });
+    });
+
+    // Make sure to return JSON here
+    res.json(horseData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Unable to fetch data" }); // Return a JSON error
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

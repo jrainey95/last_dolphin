@@ -1,0 +1,30 @@
+.area__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.horse-table {
+  width: 100%;
+  max-width: 1200px; /* Set a maximum width for the table */
+  margin-top: 20px; /* Space between input and table */
+  overflow-x: auto; /* Allows horizontal scrolling */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Remove space between borders */
+}
+
+th, td {
+  border: 1px solid #ddd; /* Add border to cells */
+  padding: 8px; /* Space inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+th {
+  background-color: #f2f2f2; /* Header background color */
+}

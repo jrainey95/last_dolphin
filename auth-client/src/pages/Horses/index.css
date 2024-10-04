@@ -1,0 +1,56 @@
+.area__content {
+  display: flex; /* Use Flexbox for alignment */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically if needed */
+  min-height: 100vh; /* Full height to center vertically */
+  padding: 20px; /* Add some padding */
+}
+
+.horse-table {
+  width: 100%;
+  max-width: 1200px; /* Set a maximum width for the table */
+  margin-top: 20px; /* Space between input and table */
+  overflow-x: auto; /* Allows horizontal scrolling */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Remove space between borders */
+}
+
+th, td {
+  border: 1px solid #ddd; /* Add border to cells */
+  padding: 8px; /* Space inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+th {
+  background-color: #f2f2f2; /* Header background color */
+}
+
+td button {
+  padding: 5px 10px; /* Space inside buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+
+.letter-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between buttons */
+  margin-bottom: 20px; /* Space below navigation */
+}
+
+.letter-navigation button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.letter-navigation button:hover {
+  background-color: #0056b3;
+}
